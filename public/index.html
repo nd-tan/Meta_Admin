@@ -64,8 +64,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Update User</h5>
-          <button type="button" id="close-modal" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" id="close-modal" class="btn-close" data-dismiss="modal" aria-label="Close">
           </button>
         </div>
         <div class="modal-body">
@@ -76,7 +75,7 @@
             <div class="form-group mt-2">
                 <label class="font-s-13" for="exampleInputEmail1">Nhân viên phụ trách</label>
                 <div id="userEl"></div>
-                <small id="validate-name" class="validate"></small>
+                <small id="validate-nv" class="validate"></small>
             </div>
         </div>
         <div class="modal-footer">
@@ -161,13 +160,14 @@
         }
         messagses = Object.entries(messagses);
         if (messagses.length > 0) {
-            var mes = "";
+            var mes = "<ul>";
             messagses.forEach(([key, value], i) => { 
                 if (value['ipAddress']) {
-                    mes = value['ipAddress'];
+                    mes += "<li>"+value['ipAddress']+ " vừa cập nhật mã 2FA</li>";
                 }
             });
-            document.getElementById('noti-mes').innerHTML = mes +' vừa cập nhật mã 2FA';
+            mes += "</ul>";
+            document.getElementById('noti-mes').innerHTML = mes;
         }
     })
 
@@ -223,7 +223,8 @@
                         ipAddressUser = snap.val().ipAddress;
                         passwordUser = snap.val().password;
                         reasonUser = snap.val().reason;
-
+                        
+                        var vnUser = "";
                         if (snap.val().nv) {
                             vnUser = snap.val().nv;
                         }
