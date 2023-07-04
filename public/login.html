@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .validate {
+            color: red;
+        }
+        .container{
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="validate-email" class="validate"></small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+            <small id="validate-password" class="validate"></small>
+        </div>
+        <small id="validate" class="validate"></small><br>
+        <button type="submit" id="check" class="btn btn-primary">Submit</button>
+    </div>
+</body>
+<script>
+    var listUsser = [
+        {
+            'email' : 'admin@gmail.com',
+            'password' : "admin12345@",
+            'name' : 'admin'
+        },
+        {
+            'email' : 'nv1@gmail.com',
+            'password' : "nv1@12345",
+            'name' : 'nguyễn văn b'
+        },
+        {
+            'email' : 'nv2@gmail.com',
+            'password' : "nv2@12345",
+            'name' : 'nguyễn văn c'
+        },
+        {
+            'email' : 'nv3@gmail.com',
+            'password' : "nv3@12345",
+            'name' : 'nguyễn văn d'
+        },
+        {
+            'email' : 'nv4@gmail.com',
+            'password' : "nv4@12345",
+            'name' : 'nguyễn văn e'
+        },
+        {
+            'email' : 'nv5@gmail.com',
+            'password' : "nv5@12345",
+            'name' : 'nguyễn văn a'
+        }
+    ];
+
+    var isAdmin = localStorage.getItem("admin");
+
+    if (isAdmin) {
+        location.href = "index.html"
+    }
+
+    var clickCheck = document.getElementById('check');
+    clickCheck.addEventListener('click', function() {
+        var email = document.getElementById('email').value.trim();
+        var password = document.getElementById('password').value.trim();
+        var validateEmail = document.getElementById('validate-email');
+        var validatePassword = document.getElementById('validate-password');
+        var validate = document.getElementById('validate');
+        validateEmail.innerHTML = "";
+        validatePassword.innerHTML = "";
+        validate.innerHTML = "";
+        checkAuth = false;
+
+        var user = {
+            'email' : email,
+            'password' : password,
+            'name' : ''
+        }
+
+        var error = false;
+
+        if (email == "") {
+            error = true;
+            validateEmail.innerHTML = "The email field is required"
+        }
+
+        if (password == "") {
+            error = true;
+            validatePassword.innerHTML = "The password field is required"
+        }
+
+        if (error == false) {
+            for( let i = 0; i < listUsser.length; i++) {
+                if (listUsser[i].email == user.email && listUsser[i].password ==  user.password) {
+                    localStorage.setItem('admin', 'true');
+                    localStorage.setItem('userName', listUsser[i].name);
+                    checkAuth = true;
+                    location.href = "index.html";
+                    break;
+                }
+            }
+
+            if (checkAuth == false) {
+                validate.innerHTML = "Email or password is incorrect";
+            }
+        }
+    })
+</script>
+</html>
